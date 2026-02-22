@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include "linkedlist.h"
 
-/* Function to validate dynamic allocation success */
+/* validate dynamic allocation success */
 
 void check_allocation(void* ptr) {
     if ( ptr == NULL) {
@@ -12,7 +12,7 @@ void check_allocation(void* ptr) {
     }
 }
 
-/* Fanction to create head or add a node to the tail*/
+/* create head or add a node to the tail*/
 
 void add_to_end(node **head,int val) {
     node *newNode=(node*)malloc(sizeof(node));
@@ -34,7 +34,7 @@ void add_to_end(node **head,int val) {
         return;
     }
 
- /* Function to free linked list */
+ /* free linked list */
 
 void free_list(node* head) {
     if(!head) {
@@ -50,7 +50,7 @@ void free_list(node* head) {
     }   
  }  
  
-  /* Function to print linked list */
+  /* print linked list */
 void print_list(node* head) {
     node* phead = head ;
 
@@ -59,3 +59,14 @@ void print_list(node* head) {
         phead = phead->next;
         }
 }
+
+  /* Linked list length */
+  int list_length(node *head){
+    int count = 0;
+    node *temp = head;
+    while (temp != NULL) {
+        temp = temp->next;
+        count+=1;
+    }
+    return count;
+  }

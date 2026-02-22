@@ -11,11 +11,13 @@ int main(void) {
  
    // Initialaizing cards pack,player's hand and dealer's hand linked lists 
     node *deck = NULL;
-    
-    //node *pl_hand = NULL;
-    //node *dl_hand = NULL;
-    uint8_t suit = 1;
+    node *player_hand = NULL;
+    node *dealer_hand = NULL; 
+    int cash = 1000;
+    int pot = 0;
+
    // Initialaizing the 52 cards in the linked list 
+   uint8_t suit = 1;
    while (suit <= 8) {
         uint8_t rank = 0;
         while (rank <=12) {
@@ -25,5 +27,7 @@ int main(void) {
         }
         suit= suit<<1;
     }
-    print_list(deck);
+    printf("total lenght of the linked list is %d \n", list_length(deck));
+
+
 }
