@@ -70,3 +70,6 @@ void print_list(node* head) {
     }
     return count;
   }
+
+  /* Card draw from deck to player */
+  
