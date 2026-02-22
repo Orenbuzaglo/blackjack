@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include <stdint.h>
 #include "linkedlist.h"
 
 /* Function to validate dynamic allocation success */
@@ -13,23 +14,24 @@ void check_allocation(void* ptr) {
 
 /* Fanction to create head or add a node to the tail*/
 
-node* add_to_end(node* head,int val) {
-    node* newNode=(node*)malloc(sizeof(node));
+void add_to_end(node **head,int val) {
+    node *newNode=(node*)malloc(sizeof(node));
     check_allocation(newNode);
     newNode->data = val;
     newNode->next = NULL;
-    /* If head is the only one node it will get the newNode*/
-    if(head == NULL) 
-    return newNode;
+    /* If head is NULL it will get the newNode*/
+    if(*head == NULL) {
+    *head = newNode;
+    return;
+    }
 
     /* Searching the last node that holds NULL */
-    node* temp = head;
+    node* temp = *head;
     while (temp->next != NULL) {
         temp = temp->next; // It will add a next in any iteration untill NULL will be presented(temp->next->next ...)
         }    
         temp->next = newNode; // Put the new node to the last so the newNode is the last one  
-        
-        return head;
+        return;
     }
 
  /* Function to free linked list */
