@@ -73,3 +73,32 @@ void print_list(node* head) {
 
   /* Card draw from deck to player */
   
+  void card_draw(node** deck,node** draw_card) {
+    // Validate that the deck is not empty
+    if((*deck) == NULL) {
+        printf("The deck is empty\n");
+        return;
+    }
+    node* curr = *deck;
+    node* prev = NULL;
+    int target;
+    // get random number in deck's cards range
+    target = rand() % list_length(*deck);
+
+    // In case rand returned 0
+        if (target == 0) {
+            *draw_card = *deck ;
+            *deck = (*deck)->next;
+            (*draw_card)->next = NULL;
+            return ;
+        }
+    while (target > 0) {
+        prev = curr;
+        curr = curr->next;
+        target--;
+    }
+    prev->next = curr->next;
+    *draw_card = curr;
+    (*draw_card)->next = NULL;
+    return;
+  }

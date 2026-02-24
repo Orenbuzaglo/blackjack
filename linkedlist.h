@@ -15,5 +15,6 @@ void add_to_end(node **head,int val);
 void free_list(node* head);
 void print_list(node* head);
 int list_length(node *head);
+node* card_draw(node *card);
 
 #endif
