@@ -18,8 +18,8 @@ int main(void) {
     int pot = 0;
     uint8_t suit = 1;
      srand(time(NULL)); // Initializing the random number generator
-           // Initialaizing the 52 cards in the linked list 
-              
+     
+           // Initialaizing the 52 cards in the linked list          
    while (suit <= 8) {
         uint8_t rank = 0;
             while (rank <=12) {
