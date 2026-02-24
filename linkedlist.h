@@ -4,6 +4,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include <stdint.h>
+#include <inttypes.h>
 
 typedef struct node {
     uint8_t data;
@@ -11,7 +12,7 @@ typedef struct node {
 } node ;
 
 void check_allocation(void* ptr);
-void add_to_end(node **head,int val);
+void add_to_end(node **head,uint8_t val);
 void free_list(node* head);
 void print_list(node* head);
 int list_length(node *head);

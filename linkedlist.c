@@ -14,8 +14,8 @@ void check_allocation(void* ptr) {
 
 /* create head or add a node to the tail*/
 
-void add_to_end(node **head,int val) {
-    node *newNode=(node*)malloc(sizeof(node));
+void add_to_end(node **head,uint8_t val) {
+    node *newNode = malloc(sizeof(node));
     check_allocation(newNode);
     newNode->data = val;
     newNode->next = NULL;
