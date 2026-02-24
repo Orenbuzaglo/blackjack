@@ -10,18 +10,16 @@
 int main(void) {
  
              // Initialaizing cards pack,player's hand and dealer's hand linked lists 
-
     node *deck = NULL;
     node *player_hand = NULL;
     node *dealer_hand = NULL;
-    node *draw_card = NULL;
-    srand(time(NULL)); // Initializing the random number generator  
+    node *draw_card = NULL; 
     int cash = 1000;
     int pot = 0;
-
+    uint8_t suit = 1;
+     srand(time(NULL)); // Initializing the random number generator
            // Initialaizing the 52 cards in the linked list 
-           
-   uint8_t suit = 1;
+              
    while (suit <= 8) {
         uint8_t rank = 0;
             while (rank <=12) {
