@@ -102,3 +102,17 @@ void print_list(node* head) {
     (*draw_card)->next = NULL;
     return;
   }
+
+  // Add the draw_card to hand
+  void add_to_hand(node** card_draw,node** hand) {
+    node* temp = *hand;
+    if(temp == NULL) {
+        *hand = *card_draw;
+    }
+    else {
+        while (temp->next != NULL ) {
+            temp = temp->next ;
+        }
+        temp->next = *card_draw;
+    }
+  }

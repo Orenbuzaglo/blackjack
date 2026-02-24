@@ -16,5 +16,6 @@ void free_list(node* head);
 void print_list(node* head);
 int list_length(node *head);
 void card_draw(node** deck,node** draw_card);
+void add_to_hand(node** card_draw,node** hand);
 
 #endif
