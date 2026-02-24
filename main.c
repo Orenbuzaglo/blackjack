@@ -44,12 +44,4 @@ int main(void) {
            "                       place your bet : ");
     scanf("%" SCNu16, &bet);
     
-
-
-
-
-
-
-
-
 }
