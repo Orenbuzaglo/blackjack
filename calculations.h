@@ -2,7 +2,7 @@
 #define CALCULATIONS_H
 
 #define DEALER 1
-#define PLAYER 2
+#define PLAYER 0
 
 #include <stdio.h>
 #include <stdbool.h>

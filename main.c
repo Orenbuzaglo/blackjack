@@ -78,7 +78,8 @@ int main(void) {
         card_draw(&deck, &draw_card);
         add_to_hand(&draw_card, &player_hand);
     }
-
+    printf("player's hand: "); 
+    decode_print(&player_hand,&game,PLAYER);
     
 
 }
