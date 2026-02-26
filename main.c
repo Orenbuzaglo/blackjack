@@ -36,7 +36,7 @@ int main(void) {
      node *draw_card = NULL; 
      uint8_t suit = 1;
      srand(time(NULL)); // Initializing the random number generator
-     Calc game = { .cash = 1000, .pot = 0, .bet = 0, .dl_sum = 0, .pl_sum = 0};
+     Calc game = { .cash = 1000, .pot = 0, .bet = 0, .dl_sum = 0, .dl_ace_count = 0, .pl_sum = 0, .pl_ace_count = 0};
      
                      // Initialaizing the 52 cards in the linked list          
    while (suit <= 8) {

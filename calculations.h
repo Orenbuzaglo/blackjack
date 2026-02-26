@@ -1,6 +1,9 @@
 #ifndef CALCULATIONS_H
 #define CALCULATIONS_H
 
+#define DEALER 1
+#define PLAYER 2
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -15,10 +18,14 @@ typedef struct Culc {
               pot, 
               bet,
            pl_sum,
-           dl_sum;
+           pl_ace_count,
+           dl_sum,
+           dl_ace_count;
 } Calc ;
 
+
+
 // Decode and print cards
-void decode_print(node** hand,Calc* game);
+void decode_print(node** hand,Calc* game,int is_dealer);
 
 #endif
