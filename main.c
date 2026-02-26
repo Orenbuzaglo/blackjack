@@ -23,7 +23,7 @@ typedef enum {
 } CardRank;
 
 
-void print_card(const char *rank, const char *suit_symbol);
+//void print_card(const char *rank, const char *suit_symbol);
 
 int main(void) {
 
@@ -56,10 +56,10 @@ int main(void) {
            "\033[32m                      Welcome to BlackJack game!\033[0m         \n\n"
            "     You own 1000$ in your wallet.You can bet in steps of 10's          \n\n"
            "                       place your bet : ");
-    scanf("%" SCNu16, &bet);
-    while ((bet%10) || bet > cash) {
+    scanf("%" SCNu16, &game.bet);
+    while ((game.bet%10) || game.bet > game.cash) {
         printf("the bet shuold be in steps of 10 and not greater than your wallet.\nTry again :");
-        scanf("%" SCNu16, &bet);
+        scanf("%" SCNu16, &game.bet);
     }
     puts("");
     game.cash -= game.bet;
@@ -78,5 +78,7 @@ int main(void) {
         card_draw(&deck, &draw_card);
         add_to_hand(&draw_card, &player_hand);
     }
+
+    
 
 }

@@ -10,7 +10,7 @@
 
 
 
-void decode_card(node** hand,Calc *game) {
+void decode_print(node** hand,Calc* game) {
 
-    
+
 }

@@ -1,10 +1,14 @@
 #ifndef CALCULATIONS_H
 #define CALCULATIONS_H
 
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
 #include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
 #include <inttypes.h>
+#include "linkedlist.h"
 
 typedef struct Culc {
     uint16_t cash,
@@ -14,12 +18,7 @@ typedef struct Culc {
            dl_sum;
 } Calc ;
 
-void decode_card(node** hand,Calc* game);
-
-
-
-
-
-
+// Decode and print cards
+void decode_print(node** hand,Calc* game);
 
 #endif
