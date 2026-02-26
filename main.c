@@ -6,6 +6,7 @@
 #include <time.h>
 #include <inttypes.h>
 #include "linkedlist.h"
+#include "calculations.h"
 
 typedef enum {
     HEARTS   = 0x1, // 0001
@@ -21,6 +22,9 @@ typedef enum {
     KING  = 13,
 } CardRank;
 
+
+void print_card(const char *rank, const char *suit_symbol);
+
 int main(void) {
 
     puts("\033[2J\033[H");
@@ -30,11 +34,9 @@ int main(void) {
      node *player_hand = NULL;
      node *dealer_hand = NULL;
      node *draw_card = NULL; 
-     uint16_t cash = 1000;
-     uint16_t pot = 0;
-     uint16_t bet; 
      uint8_t suit = 1;
      srand(time(NULL)); // Initializing the random number generator
+     Calc game = { .cash = 1000, .pot = 0, .bet = 0, .dl_sum = 0, .pl_sum = 0};
      
                      // Initialaizing the 52 cards in the linked list          
    while (suit <= 8) {
@@ -51,8 +53,8 @@ int main(void) {
     printf("########################################################################\n"
            "#                              BLACKJACK                               #\n"
            "########################################################################\n\n\n"
-           "                       Welcome to BlackJack game!                       \n\n"
-           "     You own 1000$ in your wallet.You can bet in steps of 10's\n\n"
+           "\033[32m                      Welcome to BlackJack game!\033[0m         \n\n"
+           "     You own 1000$ in your wallet.You can bet in steps of 10's          \n\n"
            "                       place your bet : ");
     scanf("%" SCNu16, &bet);
     while ((bet%10) || bet > cash) {
@@ -60,9 +62,9 @@ int main(void) {
         scanf("%" SCNu16, &bet);
     }
     puts("");
-    cash -= bet;
-    pot += bet;
-    printf("                      your wallet:%d       pot:%d                       \n\n",cash,pot);
+    game.cash -= game.bet;
+    game.pot += game.bet;
+    printf("                      your wallet:%d       pot:%d                       \n\n",game.cash,game.pot);
     
                     // Initial Deal
     
