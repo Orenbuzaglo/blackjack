@@ -80,6 +80,9 @@ int main(void) {
     }
     printf("player's hand: "); 
     decode_print(&player_hand,&game,PLAYER);
+
+    printf("\nDealer's hand: "); 
+    decode_print(&dealer_hand,&game,DEALER);
     
 
 }
