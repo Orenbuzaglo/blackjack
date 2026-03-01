@@ -23,8 +23,6 @@ typedef struct Culc {
            dl_ace_count;
 } Calc ;
 
-
-
 // Decode and print cards
 void decode_print(node** hand,Calc* game,int is_dealer);
 

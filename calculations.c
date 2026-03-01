@@ -9,7 +9,6 @@
 #include "calculations.h"
 
 
-
 void decode_print(node** hand,Calc* game,int is_dealer) {
    
     node* current = *hand;
@@ -64,8 +63,8 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
         }        
         current = (node*)current->next ;
         }
+        // Counting and presenting Dealer's hand //
         else {
-            
             uint8_t rawdata = current->data;
             int8_t rank = rawdata >> 4;
             uint8_t suit = rawdata & 0xf;

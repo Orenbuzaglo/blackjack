@@ -4,7 +4,6 @@
 #include "linkedlist.h"
 
 /* validate dynamic allocation success */
-
 void check_allocation(void* ptr) {
     if ( ptr == NULL) {
         printf(" Dynamic allocation failed.\n");
@@ -13,7 +12,6 @@ void check_allocation(void* ptr) {
 }
 
 /* create head or add a node to the tail*/
-
 void add_to_end(node **head,uint8_t val) {
     node *newNode = malloc(sizeof(node));
     check_allocation(newNode);
@@ -35,7 +33,6 @@ void add_to_end(node **head,uint8_t val) {
     }
 
  /* free linked list */
-
 void free_list(node* head) {
     if(!head) {
         printf("No list to free\n");
@@ -71,8 +68,7 @@ void print_list(node* head) {
     return count;
   }
 
-  /* Card draw from deck to player */
-  
+  /* Card draw from deck to player */  
   void card_draw(node** deck,node** draw_card) {
     // Validate that the deck is not empty
     if((*deck) == NULL) {
