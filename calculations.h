@@ -29,4 +29,7 @@ void decode_print(node** hand,Calc* game,int is_dealer);
 // Calculate hand score //
 uint8_t hand_score(Calc* game, int is_dealer);
 
+// reset round data //
+void reset_round_data(Calc* game,node** deck,node** player_hand,node** dealer_hand);
+
 #endif

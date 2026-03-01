@@ -87,14 +87,7 @@ int main(void) {
         if (pl_score == 21) {
             printf("\n\n             you have got \033[32m BLACK JACK \033[0m\n\n ");
             game.cash += (game.pot + 1.5*game.pot);
-            game.pot = 0;
-            game.bet = 0;
-            game.dl_sum = 0; 
-            game.dl_ace_count = 0;
-            game.pl_sum = 0;
-            game.pl_ace_count = 0;
-            return_to_deck(&deck,&player_hand);
-            return_to_deck(&deck,&dealer_hand);
+           reset_round_data(&game,&deck,&player_hand,&dealer_hand);
         }
 
 }
