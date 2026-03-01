@@ -81,7 +81,9 @@ int main(void) {
 
     // ####################### Stage 4 - BlackJack check #################################### //
 
-
+    int score = 0;
+     score = hand_score(&game,PLAYER);
+     printf("\n\n\n%d\n\n\n" ,score);
 
 
 }

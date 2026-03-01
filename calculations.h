@@ -13,7 +13,8 @@
 #include <inttypes.h>
 #include "linkedlist.h"
 
-typedef struct Culc {
+
+typedef struct Calc {
     uint16_t cash,
               pot, 
               bet,
