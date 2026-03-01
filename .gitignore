@@ -79,3 +79,7 @@ $RECYCLE.BIN/
 
 # debug information files
 *.dwo
+
+launch.json
+tasks.json
+program*

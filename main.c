@@ -11,6 +11,8 @@
 int main(void) {
 
     puts("\033[2J\033[H");
+
+    // ####################### Stage 1 - Initial stage #################################### //   
  
     // Initialaizing cards pack,player's hand and dealer's hand linked lists 
      node *deck = NULL;
@@ -20,7 +22,13 @@ int main(void) {
      uint8_t suit = 1;
     // Initializing the random number generator
      srand(time(NULL)); 
-     Calc game = { .cash = 1000, .pot = 0, .bet = 0, .dl_sum = 0, .dl_ace_count = 0, .pl_sum = 0, .pl_ace_count = 0};
+     Calc game = { .cash = 1000,
+                   .pot = 0,
+                   .bet = 0,
+                   .dl_sum = 0, 
+                   .dl_ace_count = 0, 
+                   .pl_sum = 0, 
+                   .pl_ace_count = 0};
      
     // Initialaizing the 52 cards in the linked list          
    while (suit <= 8) {
@@ -33,7 +41,7 @@ int main(void) {
         suit= suit<<1;
     }
     
-    // Start game - Betting stage
+    // ####################### Stage 2 - Betting stage #################################### //
 
     printf("########################################################################\n"
            "#                              BLACKJACK                               #\n"
@@ -51,7 +59,7 @@ int main(void) {
     game.pot += game.bet;
     printf("                      your wallet:%d       pot:%d                       \n\n",game.cash,game.pot);
     
-            // Initial Deal
+    // ####################### Stage 3 - Initial Deal #################################### //
     
     // 2 cards for the dealer
     for(int i=0 ; i < 2 ; i++) {
@@ -70,4 +78,10 @@ int main(void) {
     // Calculate and present dealer's hand //
     printf("\nDealer's hand: "); 
     decode_print(&dealer_hand,&game,DEALER);
+
+    // ####################### Stage 4 - BlackJack check #################################### //
+
+
+
+
 }
