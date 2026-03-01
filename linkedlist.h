@@ -12,11 +12,12 @@ typedef struct node {
 } node ;
 
 void check_allocation(void* ptr);
-void add_to_end(node **head,uint8_t val);
+void add_to_end(node** head,uint8_t val);
 void free_list(node* head);
 void print_list(node* head);
-int list_length(node *head);
+int list_length(node* head);
 void card_draw(node** deck,node** draw_card);
 void add_to_hand(node** card_draw,node** hand);
+void return_to_deck(node** deck,node** hand);
 
 #endif

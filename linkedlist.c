@@ -32,7 +32,7 @@ void add_to_end(node **head,uint8_t val) {
         return;
     }
 
- /* free linked list */
+ // free linked list //
 void free_list(node* head) {
     if(!head) {
         printf("No list to free\n");
@@ -47,7 +47,7 @@ void free_list(node* head) {
     }   
  }  
  
-  /* print linked list */
+  // print linked list //
 void print_list(node* head) {
     node* phead = head ;
 
@@ -57,7 +57,7 @@ void print_list(node* head) {
         }
 }
 
-  /* Linked list length */
+  // Linked list length //
   int list_length(node *head){
     int count = 0;
     node *temp = head;
@@ -68,7 +68,7 @@ void print_list(node* head) {
     return count;
   }
 
-  /* Card draw from deck to player */  
+  // Card draw from deck to player //  
   void card_draw(node** deck,node** draw_card) {
     // Validate that the deck is not empty
     if((*deck) == NULL) {
@@ -99,7 +99,7 @@ void print_list(node* head) {
     return;
   }
 
-  // Add the draw_card to hand
+  // Add the draw_card to hand //
   void add_to_hand(node** card_draw,node** hand) {
     node* temp = *hand;
     if(temp == NULL) {
@@ -111,4 +111,26 @@ void print_list(node* head) {
         }
         temp->next = *card_draw;
     }
+  }
+
+  // Return cards to the deck //
+  void return_to_deck(node** deck,node** hand){
+    if (*hand) {
+        node* phand = *hand;
+        node* temp = NULL;
+
+        // Catching the node before the NULL and attach it to the deck //
+        while (phand) {
+            temp = phand;
+            phand = phand->next;
+        }
+        temp->next = *deck;
+        *deck = *hand;
+        *hand = NULL;
+    }
+
+
+
+
+
   }

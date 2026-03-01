@@ -47,8 +47,8 @@ int main(void) {
            "#                              BLACKJACK                               #\n"
            "########################################################################\n\n\n"
            "\033[32m                      Welcome to BlackJack game!\033[0m         \n\n"
-           "     You own 1000$ in your wallet.You can bet in steps of 10's          \n\n"
-           "                       place your bet : ");
+           "     You own %d in your wallet.You can bet in steps of 10's          \n\n"
+           "                       place your bet : ",game.cash);
     scanf("%" SCNu16, &game.bet);
     while ((game.bet%10) || game.bet > game.cash) {
         printf("the bet shuold be in steps of 10 and not greater than your wallet.\nTry again :");
@@ -84,10 +84,17 @@ int main(void) {
     int pl_score = 0;
     int dl_score = 0;
      pl_score = hand_score(&game,PLAYER);
-     printf("\n\n\n%d\n\n\n" ,pl_score);
-
-     dl_score = hand_score(&game,DEALER);
-     printf("\n\n\n%d\n\n\n" ,dl_score);
-
+        if (pl_score == 21) {
+            printf("\n\n             you have got \033[32m BLACK JACK \033[0m\n\n ");
+            game.cash += (game.pot + 1.5*game.pot);
+            game.pot = 0;
+            game.bet = 0;
+            game.dl_sum = 0; 
+            game.dl_ace_count = 0;
+            game.pl_sum = 0;
+            game.pl_ace_count = 0;
+            return_to_deck(&deck,&player_hand);
+            return_to_deck(&deck,&dealer_hand);
+        }
 
 }
