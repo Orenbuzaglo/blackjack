@@ -72,18 +72,22 @@ int main(void) {
         add_to_hand(&draw_card, &player_hand);
     }
     // Calculate and present player's hand //
-    printf("player's hand: "); 
+    printf("\033[32m     Player's hand:  \033[0m"); 
     decode_print(&player_hand,&game,PLAYER);
 
     // Calculate and present dealer's hand //
-    printf("\nDealer's hand: "); 
+    printf("\033[31m\n\n     Dealer's hand:  \033[0m"); 
     decode_print(&dealer_hand,&game,DEALER);
 
     // ####################### Stage 4 - BlackJack check #################################### //
 
-    int score = 0;
-     score = hand_score(&game,PLAYER);
-     printf("\n\n\n%d\n\n\n" ,score);
+    int pl_score = 0;
+    int dl_score = 0;
+     pl_score = hand_score(&game,PLAYER);
+     printf("\n\n\n%d\n\n\n" ,pl_score);
+
+     dl_score = hand_score(&game,DEALER);
+     printf("\n\n\n%d\n\n\n" ,dl_score);
 
 
 }

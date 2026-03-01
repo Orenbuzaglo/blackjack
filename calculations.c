@@ -134,23 +134,21 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
 }
     // Calculate hand score //
     uint8_t hand_score(Calc* game, int is_dealer) {
+        uint8_t score = 0 ;
+        uint8_t aces = 0 ;
         if(is_dealer) {
-            uint8_t score = game->dl_sum;
-            uint8_t aces = game->dl_ace_count ;
-                while (score > 21 && aces >0 ) {
-                    score -= 10;
-                    aces --;
-                }
-        return score;        
+            score = game->dl_sum;
+            aces = game->dl_ace_count ;
         }
             else {
-                uint8_t score = game->pl_sum;
-                uint8_t aces = game->pl_ace_count ;
-                    while (score > 21 && aces >0 ) {
-                        score -= 10;
-                        aces --;
-                    }  
-                    return score; 
-                } 
+                score = game->pl_sum;
+                aces = game->pl_ace_count ;
+            }
+
+        while (score > 21 && aces > 0 ) {
+            score -= 10;
+            aces --;
+        }
+        return score;        
     }
 
