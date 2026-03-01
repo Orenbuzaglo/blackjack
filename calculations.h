@@ -26,4 +26,7 @@ typedef struct Culc {
 // Decode and print cards
 void decode_print(node** hand,Calc* game,int is_dealer);
 
+// Calculate hand score //
+uint8_t hand_score(Calc* game, int is_dealer);
+
 #endif
