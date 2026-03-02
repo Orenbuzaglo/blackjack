@@ -32,4 +32,10 @@ uint8_t hand_score(Calc* game, int is_dealer);
 // reset round data //
 void reset_round_data(Calc* game,node** deck,node** player_hand,node** dealer_hand);
 
+// Dealer draw //
+//void dealer_draw()
+
+// Player choose 'hit' //
+void hit(node** deck,node** draw_card,node** hand,Calc* game, int is_dealer);
+
 #endif
