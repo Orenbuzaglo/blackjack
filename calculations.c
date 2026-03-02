@@ -10,7 +10,14 @@
 
 
 void decode_print(node** hand,Calc* game,int is_dealer) {
-   
+    
+    if (is_dealer == 0) {
+        game->pl_sum = 0;
+        game->pl_ace_count = 0;
+    } else {
+        game->dl_sum = 0;
+        game->dl_ace_count = 0;
+    }
     node* current = *hand;
     int cardcount = 0;
         while (current != 0) {
@@ -129,7 +136,8 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
                     printf(" ");
             
             current = (node*)current->next ;
-            }    
+            
+            }   
         }
 }
     // Calculate hand score //

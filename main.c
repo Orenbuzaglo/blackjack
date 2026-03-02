@@ -71,7 +71,7 @@ int main(void) {
     // Calculate and present player's hand //
     printf("\033[32m     Player's hand:  \033[0m"); 
     decode_print(&player_hand,&game,PLAYER);
-
+    
     // Calculate and present dealer's hand //
     printf("\033[31m\n\n     Dealer's hand:  \033[0m"); 
     decode_print(&dealer_hand,&game,DEALER);
@@ -101,7 +101,6 @@ int main(void) {
                 
                    // The player choose Hit //
                     if (hitorstand == 'h') {
-                        game.pl_sum = 0;
                         card_draw(&deck,&draw_card);
                         add_to_hand(&draw_card,&player_hand);
                         decode_print(&player_hand,&game,PLAYER);
@@ -112,7 +111,14 @@ int main(void) {
                                 reset_round_data(&game,&deck,&player_hand,&dealer_hand);
                                 is_playing = 0;
                             }
-                    printf ("this is your score %d\n",pl_score);
+                    else {
+                        
+
+
+
+
+
+                    }
                 }   
                    
                 }
