@@ -171,12 +171,6 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
             return_to_deck(deck,dealer_hand);
     }
 
-    // Dealer draw //
-    //void dealer_draw()
-
-    // Player choose 'hit' //
-   // void hit(node** deck,node** draw_card,node** hand,Calc* game, int is_dealer) {
-    //    draw_card()
 
 
     
