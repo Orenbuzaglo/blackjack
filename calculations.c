@@ -171,6 +171,33 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
             return_to_deck(deck,dealer_hand);
     }
 
-
+    // Player choose Hit //
+    // int pl_hit(node** deck,node** drawed_card,node** player_hand,node** dealer_hand,Calc* game) {
+    //     int pl_score = 0;
+    //     draw_a_card(&deck,&drawed_card);
+    //     add_to_hand(&drawed_card,&player_hand);
+    //     decode_print(&player_hand,&game,PLAYER);
+    //     pl_score = hand_score(&game, PLAYER);
+    //     // printf("your score is : %d",pl_score);
+    //         if (pl_score > 21) {
+    //             printf("\nBust!\n");
+    //             game->pot = 0;
+    //             reset_round_data(&game,&deck,&player_hand,&dealer_hand);
+    //             printf("\nEnd of hit since score is over 21\n");
+                
+    //         }
+    //         if (pl_score == 21) {
+    //             printf ("\nYou got 21,now it the Dealer's turn\n");
+    //         }
+    //     return pl_score;
+    // }
+    // // Player choose Stand / Dealer draw stage //
+    // int dealer_draw(node** deck,node** drawed_card,node** player_hand,node** dealer_hand,Calc* game) {
+    //     int dl_score = 0;
+    //     draw_a_card(&deck,&drawed_card);
+    //     add_to_hand(&drawed_card,&dealer_hand);
+    //     decode_print(&dealer_hand,&game,DEALER);
+    //     dl_score = hand_score(&game, DEALER);                   
+    // } 
 
     

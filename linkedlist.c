@@ -69,7 +69,7 @@ void print_list(node* head) {
   }
 
   // Card draw from deck to player //  
-  void card_draw(node** deck,node** draw_card) {
+  void draw_a_card(node** deck,node** drawed_card) {
     // Validate that the deck is not empty
     if((*deck) == NULL) {
         printf("The deck is empty\n");
@@ -83,9 +83,9 @@ void print_list(node* head) {
 
     // In case rand returned 0
         if (target == 0) {
-            *draw_card = *deck ;
+            *drawed_card = *deck ;
             *deck = (*deck)->next;
-            (*draw_card)->next = NULL;
+            (*drawed_card)->next = NULL;
             return ;
         }
     while (target > 0) {
@@ -94,22 +94,22 @@ void print_list(node* head) {
         target--;
     }
     prev->next = curr->next;
-    *draw_card = curr;
-    (*draw_card)->next = NULL;
+    *drawed_card = curr;
+    (*drawed_card)->next = NULL;
     return;
   }
 
-  // Add the draw_card to hand //
-  void add_to_hand(node** card_draw,node** hand) {
+  // Add the drawed_card to hand //
+  void add_to_hand(node** draw_a_card,node** hand) {
     node* temp = *hand;
     if(temp == NULL) {
-        *hand = *card_draw;
+        *hand = *draw_a_card;
     }
     else {
         while (temp->next != NULL ) {
             temp = temp->next ;
         }
-        temp->next = *card_draw;
+        temp->next = *draw_a_card;
     }
   }
 
