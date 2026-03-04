@@ -79,7 +79,7 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
                 case 1: {
                     game->dl_ace_count += 1;
                     game->dl_sum += 11;
-                    if(cardcount) printf("????????");
+                    if(cardcount && game->dl_hide_card) printf("????????");
                     else
                     printf("Ace of ");
                     cardcount ++;
@@ -88,7 +88,7 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
         
                 case 11: {
                     game->dl_sum += 10 ;
-                    if(cardcount) printf("????????");
+                    if(cardcount && game->dl_hide_card) printf("????????");
                     else
                     printf ("Jack of ");
                     cardcount ++;
@@ -97,7 +97,7 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
         
                 case 12: {
                     game->dl_sum += 10 ;
-                    if(cardcount) printf("????????");
+                    if(cardcount && game->dl_hide_card) printf("????????");
                     else
                     printf ("Queen of ");
                     cardcount ++;
@@ -108,7 +108,7 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
                 case 13: {
                     
                     game->dl_sum += 10 ;
-                    if(cardcount) printf("????????");
+                    if(cardcount && game->dl_hide_card) printf("????????");
                     else
                     printf ("King of ");
                     cardcount ++;
@@ -118,14 +118,14 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
                 // Cards 2-10 //
                 default:
                     game->dl_sum += rank;
-                    if(cardcount) printf("????????");
+                    if(cardcount && game->dl_hide_card) printf("????????");
                     else
                     printf("%" PRIu8 " of ", rank);
                     cardcount ++;
                 break;
             }
                 // Let's add the suit //
-            if(cardcount < 2) 
+            if(cardcount < 2 || (!game->dl_hide_card)) 
                     switch (suit) {
                         case 1: printf("Hearts  ");     break;
                         case 2: printf("Clubs   ");     break;
@@ -180,26 +180,17 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
         pl_score = hand_score(game, PLAYER);
         return pl_score;
     }
-    //     // printf("your score is : %d",pl_score);
-    //         if (pl_score > 21) {
-    //             printf("\nBust!\n");
-    //             game->pot = 0;
-    //             reset_round_data(&game,&deck,&player_hand,&dealer_hand);
-    //             printf("\nEnd of hit since score is over 21\n");
-                
-    //         }
-    //         if (pl_score == 21) {
-    //             printf ("\nYou got 21,now it the Dealer's turn\n");
-    //         }
-    //     return pl_score;
-    // }
-    // // Player choose Stand / Dealer draw stage //
-    // int dealer_draw(node** deck,node** drawed_card,node** player_hand,node** dealer_hand,Calc* game) {
-    //     int dl_score = 0;
-    //     draw_a_card(&deck,&drawed_card);
-    //     add_to_hand(&drawed_card,&dealer_hand);
-    //     decode_print(&dealer_hand,&game,DEALER);
-    //     dl_score = hand_score(&game, DEALER);                   
-    // } 
+    // PLayer choose stand / Dealer draw //
+    int dl_draw(node** deck,node** drawed_card,node** dealer_hand,node** player_hand,Calc* game) {
+        int dl_score = 0;
+        draw_a_card(deck,drawed_card);
+        add_to_hand(drawed_card,dealer_hand);
+        printf("\033[32m     Player's hand:  \033[0m"); 
+        decode_print(player_hand,game,PLAYER);
+        printf("\033[31m\n\n     Dealer's hand:  \033[0m"); 
+        decode_print(dealer_hand,game,DEALER);
+        dl_score = hand_score(game, DEALER);
+        return dl_score;
+    }    
 
     

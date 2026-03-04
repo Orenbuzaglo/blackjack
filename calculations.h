@@ -20,7 +20,9 @@ typedef struct Calc {
            pl_sum,
            pl_ace_count,
            dl_sum,
-           dl_ace_count;
+           dl_ace_count,
+           dl_hide_card,
+           game_on;
 } Calc ;
 
 // Decode and print cards
@@ -33,7 +35,7 @@ uint8_t hand_score(Calc* game, int is_dealer);
 void reset_round_data(Calc* game,node** deck,node** player_hand,node** dealer_hand);
 
 // Dealer draw //
-//void dealer_draw()
+int dl_draw(node** deck,node** drawed_card,node** dealer_hand,node** player_hand,Calc* game);
 
 // Player choose 'hit' //
 int pl_hit(node** deck,node** drawed_card,node** player_hand,Calc* game);
