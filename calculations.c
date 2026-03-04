@@ -172,12 +172,14 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
     }
 
     // Player choose Hit //
-    // int pl_hit(node** deck,node** drawed_card,node** player_hand,node** dealer_hand,Calc* game) {
-    //     int pl_score = 0;
-    //     draw_a_card(&deck,&drawed_card);
-    //     add_to_hand(&drawed_card,&player_hand);
-    //     decode_print(&player_hand,&game,PLAYER);
-    //     pl_score = hand_score(&game, PLAYER);
+    int pl_hit(node** deck,node** drawed_card,node** player_hand,Calc* game) {
+        int pl_score = 0;
+        draw_a_card(deck,drawed_card);
+        add_to_hand(drawed_card,player_hand);
+        decode_print(player_hand,game,PLAYER);
+        pl_score = hand_score(game, PLAYER);
+        return pl_score;
+    }
     //     // printf("your score is : %d",pl_score);
     //         if (pl_score > 21) {
     //             printf("\nBust!\n");

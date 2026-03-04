@@ -36,6 +36,6 @@ void reset_round_data(Calc* game,node** deck,node** player_hand,node** dealer_ha
 //void dealer_draw()
 
 // Player choose 'hit' //
-int pl_hit(node** deck,node** drawed_card,node** player_hand,node** dealer_hand,Calc* game);
+int pl_hit(node** deck,node** drawed_card,node** player_hand,Calc* game);
 
 #endif

@@ -102,11 +102,29 @@ int main(void) {
                 
                     //The player choose to Hit //
                     if (hitorstand == 'h') {
-                        printf("player choose to hit");
+                        // Adding a card and calculate //
+                        pl_score = pl_hit(&deck,&drawed_card,&player_hand,&game);
+                        printf("player's score %d",pl_score);
+                        // If player has 21 , continue to Dealer's turn //
+                        if (pl_score == 21) {
+                            printf("\nYou have BlackJack,now its Dealer's turn\n");
+                            is_playing = 0 ;
+                            hitorstand = 's';    
+                         }
+                        // If player has above 21 //
+                        if (pl_score > 21) {
+                            printf("\nBust!!!\n");
+                            game.pot = 0;
+                            reset_round_data(&game,&deck,&player_hand,&dealer_hand);
+                            is_playing = 0;
+                            EXIT_SUCCESS;
+                        }
                     }        
                     // The player choose to Stand - Dealer's turn //
                     if (hitorstand == 's') {
                         printf("player choose to stand");
+                        is_playing = 0;
+                        EXIT_SUCCESS;
                     }
                         // is_playing = 0;
                         // while (dl_score < 17) {
@@ -140,7 +158,9 @@ int main(void) {
                     // } 
                      //is_playing = 0;  
                 //} 
-            }    
+            } 
+            printf("\nthe end\n");
+            EXIT_SUCCESS;   
         }        
        
 } //This is where the main function ends //
