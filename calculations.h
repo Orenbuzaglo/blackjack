@@ -5,7 +5,6 @@
 #define PLAYER 0
 
 #include <stdio.h>
-#include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
@@ -22,7 +21,8 @@ typedef struct Calc {
            dl_sum,
            dl_ace_count,
            dl_hide_card,
-           game_on;
+           game_on,
+           is_playing;
 } Calc ;
 
 // Decode and print cards
@@ -34,8 +34,8 @@ uint8_t hand_score(Calc* game, int is_dealer);
 // reset round data //
 void reset_round_data(Calc* game,node** deck,node** player_hand,node** dealer_hand);
 
-// Dealer draw //
-int dl_draw(node** deck,node** drawed_card,node** dealer_hand,node** player_hand,Calc* game);
+// Dealer draw / Stand  //
+int dl_draw(node** deck,node** drawed_card,node** dealer_hand,Calc* game);
 
 // Player choose 'hit' //
 int pl_hit(node** deck,node** drawed_card,node** player_hand,Calc* game);

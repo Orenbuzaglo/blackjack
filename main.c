@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
@@ -13,6 +12,7 @@ int main(void) {
     // ####################### Stage 1 - Initial stage #################################### //   
  
         puts("\033[2J\033[H");
+
         Calc game = { .cash = 1000,
                       .pot = 0,
                       .bet = 0,
@@ -21,10 +21,9 @@ int main(void) {
                       .pl_sum = 0, 
                       .pl_ace_count = 0,
                       .dl_hide_card = 1,
+                      .is_playing = 1,
                       .game_on = 1};
-
-    while(game.game_on) { 
-        puts("\033[2J\033[H");                
+                      
         // Initialaizing cards pack,player's hand and dealer's hand linked lists //
         node *deck = NULL;
         node *player_hand = NULL;
@@ -34,6 +33,7 @@ int main(void) {
         int pl_score = 0;
         int dl_score = 0;
         char cont;
+        char hitorstand;
 
         // Initializing the random number generator //
         srand(time(NULL)); 
@@ -48,15 +48,20 @@ int main(void) {
                 }
             suit= suit<<1;
         }
+
+        // Game main loop //
+    while(game.game_on) { 
+
+        puts("\033[2J\033[H"); 
         
         // ####################### Stage 2 - Betting stage #################################### //
 
         printf("########################################################################\n"
-            "#                              BLACKJACK                               #\n"
-            "########################################################################\n\n\n"
-            "\033[32m                      Welcome to BlackJack game!\033[0m         \n\n"
-            "     You own %d$ in your wallet.You can bet in steps of 10's          \n\n"
-            "                       place your bet : ",game.cash);
+               "#                              BLACKJACK                               #\n"
+               "########################################################################\n\n\n"
+               "\033[32m                      Welcome to BlackJack game!\033[0m         \n\n"
+               "     You own %d$ in your wallet.You can bet in steps of 10's          \n\n"
+               "                       place your bet : ",game.cash);
         scanf("%" SCNu16, &game.bet);
         while ((game.bet%10) || game.bet > game.cash) {
             printf("the bet shuold be in steps of 10 and not greater than your wallet.\nTry again :");
@@ -89,69 +94,72 @@ int main(void) {
             if (pl_score == 21) {
                 printf("\n\n             you have got \033[32m BLACK JACK \033[0m\n\n ");
                 game.cash += (game.pot + 1.5*game.pot);
-            reset_round_data(&game,&deck,&player_hand,&dealer_hand);
             }
 
         // ###################### Stage 5 - Hit Or Stand ######################################## //
 
                 else {
-                    char hitorstand;
-                    uint8_t is_playing = 1;
-                    while(is_playing) {
-                        do {
-                        printf("\n\n     Hit or Stand? (\033[32mh\033[0m for hit \033[31m s\033[0m for stand)\n     " );
-                        printf("Your choice: ");
-                        scanf(" %c", &hitorstand);
-                        }
-                        while (hitorstand != 'h' && hitorstand != 's');
                     
-                        //The player choose to Hit //
-                        if (hitorstand == 'h') {
-                            // Adding a card and calculate //
-                            pl_score = pl_hit(&deck,&drawed_card,&player_hand,&game);
-                            printf("player's score %d",pl_score);
+                    while(game.is_playing) {
+                            do {
+                            printf("\n\n     Hit or Stand? (\033[32mh\033[0m for hit \033[31m s\033[0m for stand)    " );
+                            printf("Your choice: ");
+                            scanf(" %c", &hitorstand);
+                            }
+                            while (hitorstand != 'h' && hitorstand != 's');
+                        
+                            //The player choose to Hit //
+                            if (hitorstand == 's') game.is_playing = 0 ;
+                            if (hitorstand == 'h') {
+                             pl_score = pl_hit(&deck,&drawed_card,&player_hand,&game);
+                                  
                             // If player has 21 , continue to Dealer's turn //
                             if (pl_score == 21) {
-                                printf("\nYou have BlackJack,now its Dealer's turn\n");
-                                is_playing = 0 ;
-                                hitorstand = 's';    
+                                printf("\nYou have BlackJack \n");
+                                game.is_playing = 0 ;  
                             }
                             // If player has above 21 //
                             if (pl_score > 21) {
                                 printf("\nBust!!!\n");
                                 game.pot = 0;
-                                reset_round_data(&game,&deck,&player_hand,&dealer_hand);
-                                is_playing = 0;
+                                game.is_playing = 0;
                             }
-                        }        
-                        // The player choose to Stand - Dealer's turn //
-                        if (hitorstand == 's') {
-                            game.dl_hide_card = 0;
-                            do {
-                            dl_score = dl_draw(&deck,&drawed_card,&dealer_hand,&player_hand,&game);
-                            if (dl_score > 21) {
-                                printf("\ndealer is busted\n");
-                                is_playing = 0;
                             }
-
-                            }
-                            while (dl_score<17);
                             
-                        
-                        }   
-                }
-                      game.pot = 0,
-                      game.bet = 0,
-                      game.dl_sum = 0, 
-                      game.dl_ace_count = 0, 
-                      game.pl_sum = 0, 
-                      game.pl_ace_count = 0,
-                      game.dl_hide_card = 1,
-                      game.game_on = 1; 
+                        }
+                                
+                            // The player choose to Stand - Dealer's turn //
+                            
+                            if (pl_score <= 21) printf(" It's the Dealer's turn \n");
+                            
+                            
+
+
+
+
+
+
+                            // if (hitorstand == 's') {
+                            //     dl_score = hand_score(&game,DEALER);
+                            //     game.dl_hide_card = 0;
+                            // }
+                            // if (dl_score < 17) {
+                            //     do {
+                            //         dl_score = dl_draw(&deck,&drawed_card,&dealer_hand,&game);
+                            //         if (dl_score > 21) {
+                            //             printf("\ndealer is busted\n");
+                            //             game.is_playing = 0;
+                            //         }
+                            //     }
+                            //     while (dl_score < 17);
+                            //     game.is_playing = 0;
+                            // } 
+                                
+                }        
+             
                 printf("\nLet's continue? y/n :\n");
-                scanf(" %c", &cont);
-                
-            }  
+                scanf(" %c", &cont); 
+                reset_round_data(&game,&deck,&player_hand,&dealer_hand);
     } // Game on while loop //
         
 } //This is where the main function ends //

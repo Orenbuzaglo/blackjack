@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
@@ -140,7 +139,8 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
             }   
         }
 }
-    // Calculate hand score //
+
+    // Calculate final score related to aces //
     uint8_t hand_score(Calc* game, int is_dealer) {
         uint8_t score = 0 ;
         uint8_t aces = 0 ;
@@ -159,16 +159,20 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
         }
         return score;        
     }
+
     // reset round data //
     void reset_round_data(Calc* game,node** deck,node** player_hand,node** dealer_hand) {
         game->pot = 0;
-            game->bet = 0;
-            game->dl_sum = 0; 
-            game->dl_ace_count = 0;
-            game->pl_sum = 0;
-            game->pl_ace_count = 0;
-            return_to_deck(deck,player_hand);
-            return_to_deck(deck,dealer_hand);
+        game->bet = 0;
+        game->dl_sum = 0; 
+        game->dl_ace_count = 0;
+        game->pl_sum = 0;
+        game->pl_ace_count = 0;
+        game->dl_hide_card = 1;
+        game->game_on = 1;
+        game->is_playing = 1;
+        return_to_deck(deck,player_hand);
+        return_to_deck(deck,dealer_hand);
     }
 
     // Player choose Hit //
@@ -180,17 +184,14 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
         pl_score = hand_score(game, PLAYER);
         return pl_score;
     }
+
     // PLayer choose stand / Dealer draw //
-    int dl_draw(node** deck,node** drawed_card,node** dealer_hand,node** player_hand,Calc* game) {
+    int dl_draw(node** deck,node** drawed_card,node** dealer_hand,Calc* game) {
         int dl_score = 0;
         draw_a_card(deck,drawed_card);
         add_to_hand(drawed_card,dealer_hand);
-        printf("\033[32m     Player's hand:  \033[0m"); 
-        decode_print(player_hand,game,PLAYER);
         printf("\033[31m\n\n     Dealer's hand:  \033[0m"); 
         decode_print(dealer_hand,game,DEALER);
         dl_score = hand_score(game, DEALER);
         return dl_score;
     }    
-
-    
