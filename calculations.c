@@ -56,7 +56,7 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
                 // Cards 2-10 //
                 default: {
                     game->pl_sum += rank;
-                    printf("%" PRIu8 " of ", rank);
+                    printf(" %" PRIu8 " of ", rank);
                 }
                 break;
             }
@@ -119,7 +119,7 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
                     game->dl_sum += rank;
                     if(cardcount && game->dl_hide_card) printf("????????");
                     else
-                    printf("%" PRIu8 " of ", rank);
+                    printf(" %" PRIu8 " of ", rank);
                     cardcount ++;
                 break;
             }
@@ -128,7 +128,7 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
                     switch (suit) {
                         case 1: printf("Hearts  "); break;
                         case 2: printf("Clubs   "); break;
-                        case 4: printf("Diamonds"); break;
+                        case 4: printf("Diamonds   "); break;
                         case 8: printf("Spades  "); break;
                     }
                 else

@@ -132,9 +132,28 @@ int main(void) {
                                 dl_score = hand_score(&game,DEALER);
                                 game.dl_hide_card = 0;
                                 printf(" It's the Dealer's turn \n");
+                                if(dl_score >=17 ) decode_print(&dealer_hand,&game,DEALER);
                                 while (dl_score < 17) {
                                     dl_score = dl_draw(&deck,&drawed_card,&dealer_hand,&game);
                                 }
+                                printf("\nYour score :%d\n",pl_score);
+                                printf("\nDealer's score :%d\n",dl_score);
+                            
+                            if (dl_score > 21) {
+                                printf("Dealer is Bust.You win");
+                                game.cash += game.pot;
+                                game.pot = 0;
+                            }
+                            if (dl_score < pl_score) {
+                                printf("You win");
+                                game.cash += game.pot;
+                                game.pot = 0;
+                            }
+                            if (dl_score > pl_score && dl_score < 22) {
+                                printf("You Loose");
+                                game.cash -= game.pot;
+                                game.pot = 0;
+                            }
                             }
                                 
                 }        
