@@ -111,49 +111,31 @@ int main(void) {
                             //The player choose to Hit //
                             if (hitorstand == 's') game.is_playing = 0 ;
                             if (hitorstand == 'h') {
-                             pl_score = pl_hit(&deck,&drawed_card,&player_hand,&game);
+                                pl_score = pl_hit(&deck,&drawed_card,&player_hand,&game);
                                   
                             // If player has 21 , continue to Dealer's turn //
-                            if (pl_score == 21) {
-                                printf("\nYou have BlackJack \n");
-                                game.is_playing = 0 ;  
-                            }
-                            // If player has above 21 //
-                            if (pl_score > 21) {
-                                printf("\nBust!!!\n");
-                                game.pot = 0;
-                                game.is_playing = 0;
-                            }
-                            }
-                            
-                        }
-                                
+                                if (pl_score == 21) {
+                                    printf("\nYou have BlackJack \n");
+                                    game.is_playing = 0 ;  
+                                }
+                                // If player has above 21 //
+                                if (pl_score > 21) {
+                                    printf("\nBust!!!\n");
+                                    game.pot = 0;
+                                    game.is_playing = 0;
+                                }
+                            }                           
+                        }    
                             // The player choose to Stand - Dealer's turn //
                             
-                            if (pl_score <= 21) printf(" It's the Dealer's turn \n");
-                            
-                            
-
-
-
-
-
-
-                            // if (hitorstand == 's') {
-                            //     dl_score = hand_score(&game,DEALER);
-                            //     game.dl_hide_card = 0;
-                            // }
-                            // if (dl_score < 17) {
-                            //     do {
-                            //         dl_score = dl_draw(&deck,&drawed_card,&dealer_hand,&game);
-                            //         if (dl_score > 21) {
-                            //             printf("\ndealer is busted\n");
-                            //             game.is_playing = 0;
-                            //         }
-                            //     }
-                            //     while (dl_score < 17);
-                            //     game.is_playing = 0;
-                            // } 
+                            if (pl_score <= 21) {
+                                dl_score = hand_score(&game,DEALER);
+                                game.dl_hide_card = 0;
+                                printf(" It's the Dealer's turn \n");
+                                while (dl_score < 17) {
+                                    dl_score = dl_draw(&deck,&drawed_card,&dealer_hand,&game);
+                                }
+                            }
                                 
                 }        
              
