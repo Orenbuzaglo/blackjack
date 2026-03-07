@@ -30,26 +30,26 @@
                 case 1: {
                     game->pl_ace_count += 1;
                     game->pl_sum += 11;
-                    printf("Ace of ");
+                    printf(" Ace of ");
                 }
                 break;
             
                 case 11: {
                     game->pl_sum += 10 ;
-                    printf ("Jack of ");
+                    printf (" Jack of ");
                 }
                 break;
             
                 case 12: {
                     game->pl_sum += 10 ;
-                    printf ("Queen of ");
+                    printf (" Queen of ");
                     
                 }
                 break;
                 
                 case 13: {   
                     game->pl_sum += 10 ;
-                    printf ("King of ");
+                    printf (" King of ");
                 }
                 break;
 
@@ -80,7 +80,7 @@
                     game->dl_sum += 11;
                     if(cardcount && game->dl_hide_card) printf("????????");
                     else
-                    printf("Ace of ");
+                    printf(" Ace of ");
                     cardcount ++;
                 }
                 break;
@@ -89,7 +89,7 @@
                     game->dl_sum += 10 ;
                     if(cardcount && game->dl_hide_card) printf("????????");
                     else
-                    printf ("Jack of ");
+                    printf (" Jack of ");
                     cardcount ++;
                 }
                 break;
@@ -98,7 +98,7 @@
                     game->dl_sum += 10 ;
                     if(cardcount && game->dl_hide_card) printf("????????");
                     else
-                    printf ("Queen of ");
+                    printf (" Queen of ");
                     cardcount ++;
                     
                 }
@@ -109,7 +109,7 @@
                     game->dl_sum += 10 ;
                     if(cardcount && game->dl_hide_card) printf("????????");
                     else
-                    printf ("King of ");
+                    printf (" King of ");
                     cardcount ++;
                 }
                 break;

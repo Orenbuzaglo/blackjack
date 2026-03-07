@@ -117,12 +117,14 @@ int main(void) {
                             // If player has 21 , continue to Dealer's turn //
                                 if (pl_score == 21) {
                                     printf("\n                       You have BlackJack \n");
-                                    game.is_playing = 0 ;  
+                                    game.is_playing = 0 ; 
+                                    game.pot = 0 ; 
                                 }
                                 // If player has above 21 //
                                 if (pl_score > 21) {
                                     printf("\n                       Bust!!!\n");
                                     game.is_playing = 0;
+                                    game.pot = 0 ;
                                 }
                             }                           
                         }    
@@ -169,7 +171,7 @@ int main(void) {
                             }                                
                 }        
                 if ( game.cash < 10) {
-                    printf("                       You are out of money, game is over \n");
+                    printf("                       You are out of money, game is over \n\n\n");
                     free_list(player_hand);
                     free_list(dealer_hand);
                     free_list(deck);
