@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <inttypes.h>
+#include <unistd.h>
 #include "linkedlist.h"
 #include "calculations.h"
 
@@ -134,11 +135,12 @@ int main(void) {
                                 printf("\033[32m    Player's hand:    \033[0m");
                                 decode_print(&player_hand,&game,PLAYER);
                                 printf("\033[31m\n\n    Dealer's hand:    \033[0m"); 
-                                decode_print(&dealer_hand,&game,DEALER);
+                                //decode_print(&dealer_hand,&game,DEALER);
                                 if(dl_score >=17 ) decode_print(&dealer_hand,&game,DEALER);
                                 
                                 while (dl_score < 17) {
                                     dl_score = dl_draw(&deck,&drawed_card,&dealer_hand,&game);
+                                    sleep(1);
                                 }
                                 printf("\n\n                       Your score :%d      Dealer's score :%d\n",pl_score,dl_score);
                             
@@ -155,21 +157,33 @@ int main(void) {
                             if (dl_score > pl_score && dl_score < 22) {
                                 printf("                       You Loose\n");
                             }
-                            }
+                        }
                                 
                 }        
-             
-                printf("\n                       Let's continue? y/n : ");
-                scanf(" %c", &cont); 
-                    if (cont == 'Y' || cont == 'y') {
-                    reset_round_data(&game,&deck,&player_hand,&dealer_hand);
-                    }
-                        else if (cont == 'N' || cont == 'n') {
-                        return 0;
+                if ( game.cash < 10) {
+                    printf("                       You are out of money, game is over \n");
+                    free_list(&player_hand);
+                    free_list(&dealer_hand);
+                    free_list(&deck);
+                    return 0;
+                }
+                else {
+                        
+                    printf("\n                       Let's continue? y/n : ");
+                    scanf(" %c", &cont); 
+                        if (cont == 'Y' || cont == 'y') {
+                        reset_round_data(&game,&deck,&player_hand,&dealer_hand);
                         }
+                            else if (cont == 'N' || cont == 'n') {
+                            return 0;
+                            }
+                }
 
             
     } // Game on while loop //
+    free_list(&player_hand);
+    free_list(&dealer_hand);
+    free_list(&deck);
     return 0;
         
 } //This is where the main function ends //
