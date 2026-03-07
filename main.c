@@ -94,6 +94,7 @@ int main(void) {
             if (pl_score == 21) {
                 printf("\n\n                       you have got \033[32m BLACK JACK \033[0m\n\n ");
                 game.cash += 2.5*game.pot;
+                game.pot = 0 ;
             }
 
         // ###################### Stage 5 - Hit Or Stand ######################################## //
@@ -121,7 +122,6 @@ int main(void) {
                                 // If player has above 21 //
                                 if (pl_score > 21) {
                                     printf("\n                       Bust!!!\n");
-                                    game.pot = 0;
                                     game.is_playing = 0;
                                 }
                             }                           
@@ -134,9 +134,11 @@ int main(void) {
                                 printf("\n                       It's the Dealer's turn \n\n");
                                 printf("\033[32m    Player's hand:    \033[0m");
                                 decode_print(&player_hand,&game,PLAYER);
-                                printf("\033[31m\n\n    Dealer's hand:    \033[0m"); 
-                                //decode_print(&dealer_hand,&game,DEALER);
-                                if(dl_score >=17 ) decode_print(&dealer_hand,&game,DEALER);
+                                
+                                if(dl_score >=17 && dl_score <=21 ){
+                                    printf("\033[31m\n\n    Dealer's hand:    \033[0m"); 
+                                    decode_print(&dealer_hand,&game,DEALER);
+                                }
                                 
                                 while (dl_score < 17) {
                                     dl_score = dl_draw(&deck,&drawed_card,&dealer_hand,&game);
@@ -144,27 +146,35 @@ int main(void) {
                                 }
                                 printf("\n\n                       Your score :%d      Dealer's score :%d\n",pl_score,dl_score);
                             
-                            if (dl_score > 21) {
-                                printf("                       Dealer is Bust.You win\n");
-                                game.cash += 2*game.pot;
-                                
-                            }
-                            if (dl_score < pl_score) {
-                                printf("                       You win\n");
-                                game.cash += 2*game.pot;
-                                
-                            }
-                            if (dl_score > pl_score && dl_score < 22) {
+                                if (dl_score > 21) {
+                                    printf("                       Dealer is Bust.You win\n");
+                                    game.cash += 2*game.pot;
+                                    game.pot = 0 ;    
+                                }
+
+                                if (dl_score < pl_score) {
+                                    printf("                       You win\n");
+                                    game.cash += 2*game.pot;
+                                    game.pot = 0 ;    
+                                }
+
+                                if (dl_score > pl_score && dl_score < 22) {
                                 printf("                       You Loose\n");
+                                game.pot = 0 ;
+                                }
+                                if (dl_score == pl_score) {
+                                    printf("\n                       This is a tie\n");
+
+                                }
+        
                             }
-                        }
                                 
                 }        
                 if ( game.cash < 10) {
                     printf("                       You are out of money, game is over \n");
-                    free_list(&player_hand);
-                    free_list(&dealer_hand);
-                    free_list(&deck);
+                    free_list(player_hand);
+                    free_list(dealer_hand);
+                    free_list(deck);
                     return 0;
                 }
                 else {
@@ -181,9 +191,9 @@ int main(void) {
 
             
     } // Game on while loop //
-    free_list(&player_hand);
-    free_list(&dealer_hand);
-    free_list(&deck);
+    free_list(player_hand);
+    free_list(dealer_hand);
+    free_list(deck);
     return 0;
         
 } //This is where the main function ends //

@@ -162,7 +162,6 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
 
     // reset round data //
     void reset_round_data(Calc* game,node** deck,node** player_hand,node** dealer_hand) {
-        game->pot = 0;
         game->bet = 0;
         game->dl_sum = 0; 
         game->dl_ace_count = 0;
