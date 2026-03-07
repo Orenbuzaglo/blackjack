@@ -32,8 +32,7 @@ int main(void) {
         uint8_t suit = 1;
         int pl_score = 0;
         int dl_score = 0;
-        char cont;
-        char hitorstand;
+        char cont, hitorstand;
 
         // Initializing the random number generator //
         srand(time(NULL)); 
@@ -56,10 +55,10 @@ int main(void) {
         
         // ####################### Stage 2 - Betting stage #################################### //
 
-        printf("########################################################################\n"
+        printf("\033[33m########################################################################\n"
                "#                              BLACKJACK                               #\n"
-               "########################################################################\n\n\n"
-               "\033[32m                      Welcome to BlackJack game!\033[0m         \n\n"
+               "########################################################################\033[0m\n\n\n"
+               "\033[32m                       Welcome to BlackJack game!\033[0m         \n\n"
                "     You own %d$ in your wallet.You can bet in steps of 10's          \n\n"
                "                       place your bet : ",game.cash);
         scanf("%" SCNu16, &game.bet);
@@ -70,7 +69,7 @@ int main(void) {
         puts("");
         game.cash -= game.bet;
         game.pot += game.bet;
-        printf("                      your wallet:%d       pot:%d                       \n\n",game.cash,game.pot);
+        printf("                       your wallet:%d       pot:%d                       \n\n",game.cash,game.pot);
         
         // ####################### Stage 3 - Initial Deal #################################### //
         
@@ -82,18 +81,18 @@ int main(void) {
             add_to_hand(&drawed_card, &player_hand);
         }
         // Calculate and present player's hand //
-        printf("\033[32m     Player's hand:  \033[0m"); 
+        printf("\033[32m    Player's hand:    \033[0m"); 
         decode_print(&player_hand,&game,PLAYER);
         
         // Calculate and present dealer's hand //
-        printf("\033[31m\n\n     Dealer's hand:  \033[0m"); 
+        printf("\033[31m\n\n    Dealer's hand:    \033[0m"); 
         decode_print(&dealer_hand,&game,DEALER);
 
         // ####################### Stage 4 - BlackJack check #################################### //
         pl_score = hand_score(&game,PLAYER);
             if (pl_score == 21) {
-                printf("\n\n             you have got \033[32m BLACK JACK \033[0m\n\n ");
-                game.cash += (game.pot + 1.5*game.pot);
+                printf("\n\n                       you have got \033[32m BLACK JACK \033[0m\n\n ");
+                game.cash += 2.5*game.pot;
             }
 
         // ###################### Stage 5 - Hit Or Stand ######################################## //
@@ -102,7 +101,7 @@ int main(void) {
                     
                     while(game.is_playing) {
                             do {
-                            printf("\n\n     Hit or Stand? (\033[32mh\033[0m for hit \033[31m s\033[0m for stand)    " );
+                            printf("\n\n                       Hit or Stand? (\033[32mh\033[0m for hit \033[31m s\033[0m for stand)    " );
                             printf("Your choice: ");
                             scanf(" %c", &hitorstand);
                             }
@@ -115,12 +114,12 @@ int main(void) {
                                   
                             // If player has 21 , continue to Dealer's turn //
                                 if (pl_score == 21) {
-                                    printf("\nYou have BlackJack \n");
+                                    printf("\n                       You have BlackJack \n");
                                     game.is_playing = 0 ;  
                                 }
                                 // If player has above 21 //
                                 if (pl_score > 21) {
-                                    printf("\nBust!!!\n");
+                                    printf("\n                       Bust!!!\n");
                                     game.pot = 0;
                                     game.is_playing = 0;
                                 }
@@ -131,36 +130,46 @@ int main(void) {
                             if (pl_score <= 21) {
                                 dl_score = hand_score(&game,DEALER);
                                 game.dl_hide_card = 0;
-                                printf(" It's the Dealer's turn \n");
+                                printf("\n                       It's the Dealer's turn \n\n");
+                                printf("\033[32m    Player's hand:    \033[0m");
+                                decode_print(&player_hand,&game,PLAYER);
+                                printf("\033[31m\n\n    Dealer's hand:    \033[0m"); 
+                                decode_print(&dealer_hand,&game,DEALER);
                                 if(dl_score >=17 ) decode_print(&dealer_hand,&game,DEALER);
+                                
                                 while (dl_score < 17) {
                                     dl_score = dl_draw(&deck,&drawed_card,&dealer_hand,&game);
                                 }
-                                printf("\nYour score :%d\n",pl_score);
-                                printf("\nDealer's score :%d\n",dl_score);
+                                printf("\n\n                       Your score :%d      Dealer's score :%d\n",pl_score,dl_score);
                             
                             if (dl_score > 21) {
-                                printf("Dealer is Bust.You win");
-                                game.cash += game.pot;
-                                game.pot = 0;
+                                printf("                       Dealer is Bust.You win\n");
+                                game.cash += 2*game.pot;
+                                
                             }
                             if (dl_score < pl_score) {
-                                printf("You win");
-                                game.cash += game.pot;
-                                game.pot = 0;
+                                printf("                       You win\n");
+                                game.cash += 2*game.pot;
+                                
                             }
                             if (dl_score > pl_score && dl_score < 22) {
-                                printf("You Loose");
-                                game.cash -= game.pot;
-                                game.pot = 0;
+                                printf("                       You Loose\n");
                             }
                             }
                                 
                 }        
              
-                printf("\nLet's continue? y/n :\n");
+                printf("\n                       Let's continue? y/n : ");
                 scanf(" %c", &cont); 
-                reset_round_data(&game,&deck,&player_hand,&dealer_hand);
+                    if (cont == 'Y' || cont == 'y') {
+                    reset_round_data(&game,&deck,&player_hand,&dealer_hand);
+                    }
+                        else if (cont == 'N' || cont == 'n') {
+                        return 0;
+                        }
+
+            
     } // Game on while loop //
+    return 0;
         
 } //This is where the main function ends //

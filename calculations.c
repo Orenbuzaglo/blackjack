@@ -180,6 +180,7 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
         int pl_score = 0;
         draw_a_card(deck,drawed_card);
         add_to_hand(drawed_card,player_hand);
+        printf("\033[32m    Player's hand:    \033[0m"); 
         decode_print(player_hand,game,PLAYER);
         pl_score = hand_score(game, PLAYER);
         return pl_score;
@@ -190,7 +191,7 @@ void decode_print(node** hand,Calc* game,int is_dealer) {
         int dl_score = 0;
         draw_a_card(deck,drawed_card);
         add_to_hand(drawed_card,dealer_hand);
-        printf("\033[31m\n\n     Dealer's hand:  \033[0m"); 
+        printf("\033[31m\n\n    Dealer's hand:    \033[0m"); 
         decode_print(dealer_hand,game,DEALER);
         dl_score = hand_score(game, DEALER);
         return dl_score;
