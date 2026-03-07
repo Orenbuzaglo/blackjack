@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include "linkedlist.h"
 
-/* validate dynamic allocation success */
+// validate dynamic allocation success //
 void check_allocation(void* ptr) {
     if ( ptr == NULL) {
         printf(" Dynamic allocation failed.\n");
@@ -11,7 +11,7 @@ void check_allocation(void* ptr) {
     }
 }
 
-/* create head or add a node to the tail*/
+// create head or add a node to the tail //
 void add_to_end(node **head,uint8_t val) {
     node *newNode = malloc(sizeof(node));
     check_allocation(newNode);

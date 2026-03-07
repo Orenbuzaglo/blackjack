@@ -7,8 +7,8 @@
 #include "linkedlist.h"
 #include "calculations.h"
 
-
-void decode_print(node** hand,Calc* game,int is_dealer) {
+    // Decode and print cards //
+    void decode_print(node** hand,Calc* game,int is_dealer) {
     
     if (is_dealer == 0) {
         game->pl_sum = 0;

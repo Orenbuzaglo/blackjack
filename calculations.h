@@ -25,7 +25,7 @@ typedef struct Calc {
            is_playing;
 } Calc ;
 
-// Decode and print cards
+// Decode and print cards //
 void decode_print(node** hand,Calc* game,int is_dealer);
 
 // Calculate hand score //

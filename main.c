@@ -165,10 +165,8 @@ int main(void) {
                                 if (dl_score == pl_score) {
                                     printf("\n                       This is a tie\n");
 
-                                }
-        
-                            }
-                                
+                                }        
+                            }                                
                 }        
                 if ( game.cash < 10) {
                     printf("                       You are out of money, game is over \n");
@@ -187,13 +185,11 @@ int main(void) {
                             else if (cont == 'N' || cont == 'n') {
                             return 0;
                             }
-                }
-
-            
-    } // Game on while loop //
+                }            
+    } 
     free_list(player_hand);
     free_list(dealer_hand);
     free_list(deck);
     return 0;
         
-} //This is where the main function ends //
+}
