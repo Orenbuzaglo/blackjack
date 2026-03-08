@@ -118,7 +118,7 @@ int main(void) {
                                 if (pl_score == 21) {
                                     printf("\n                       You have BlackJack \n");
                                     game.is_playing = 0 ; 
-                                    game.pot = 0 ; 
+                                  
                                 }
                                 // If player has above 21 //
                                 if (pl_score > 21) {
@@ -161,8 +161,8 @@ int main(void) {
                                 }
 
                                 if (dl_score > pl_score && dl_score < 22) {
-                                printf("                       You Loose\n");
-                                game.pot = 0 ;
+                                    printf("                       You Loose\n");
+                                    game.pot = 0 ;
                                 }
                                 if (dl_score == pl_score) {
                                     printf("\n                       This is a tie\n");
